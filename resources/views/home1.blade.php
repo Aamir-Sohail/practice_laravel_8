@@ -90,7 +90,7 @@
 @endphp    
 @endwhile
        </div>
- 
+ {{-- This is Foreach loop is used. --}}
       <div class="container" >
           <h5>
           {{'Foreach Loop'}}
@@ -108,5 +108,19 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
        @endforeach
        </select>
       </div>
+        {{-- This is Continue and breake methode --}}
+       <div class="container">
+           <h5>
+               {{"Continue and Break Methode"}}
+           </h5>
+                    @for ($i=1; $i<20; $i++)
+                   @if ($i==9)
+                       @continue
+                       @break{{-- (this breake methode disapper the loop after 9) --}}
+                   @endif
+                   {{$i}}
+                    @endfor 
+    </div> 
+
   </body>
 </html>

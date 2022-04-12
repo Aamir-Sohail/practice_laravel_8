@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DemoController;
+use App\Http\Controllers\SingleActionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,11 +60,35 @@ Route::get('/data/{name}/{id?}', function ($name, $id = null) {
 
 
 
-// New Project For ForntEnd.....
-Route::get('/{name?}', function ($name = null) {
+// New Project For function.....
+Route::get('function/{name?}', function ($name = null) {
     $demo = "<h2> The new Mehtode in Laravel </h2>";
     $data = compact('name','demo');
-    return view('home')->with($data);
+    return view('home1')->with($data);
 });
 
 
+
+// The new PrOject Routes For layout
+
+Route::get('home',function( ){
+return view('layouts.home');
+
+});
+
+
+Route::get('/about',function(){
+    return view('layouts.about');
+    });
+
+    Route::get('/courses',function(){
+        return view('layouts.courses');
+        }); 
+
+
+        // NEW Project with ForntEnd routes..
+        Route::get('/',[DemoController::class,'index']);
+        Route::get('/about',[DemoController::class,'aboutpage']);
+        // Route::get('/course',[DemoController::class,'coursespage']);
+        // singleActionController is used for single function array not used..
+        Route::get('/course',SingleActionController::class);
