@@ -60,6 +60,9 @@ Route::get('/data/{name}/{id?}', function ($name, $id = null) {
 
 // New Project For ForntEnd.....
 Route::get('/{name?}', function ($name = null) {
-    $data = compact('name');
+    $demo = "<h2> The new Mehtode in Laravel </h2>";
+    $data = compact('name','demo');
     return view('home')->with($data);
 });
+
+
