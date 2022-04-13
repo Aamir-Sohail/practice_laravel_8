@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\SingleActionController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,12 +85,20 @@ Route::get('/about',function(){
 
     Route::get('/courses',function(){
         return view('layouts.courses');
-        }); 
+        });
 
 
         // NEW Project with ForntEnd routes..
-        Route::get('/',[DemoController::class,'index']);
+        Route::get('/index',[DemoController::class,'index']);
         Route::get('/about',[DemoController::class,'aboutpage']);
         // Route::get('/course',[DemoController::class,'coursespage']);
         // singleActionController is used for single function array not used..
         Route::get('/course',SingleActionController::class);
+        //Route for Nlew Controller PhotoController which work as a Resouce Controller.
+        Route::resource('/photo',PhotoController::class);
+
+
+        //Crud Operation start in this stage 
+        Route::get('/register', [RegistrationController::class,'index']);
+
+        Route::post('/register', [RegistrationController::class,'store']);
