@@ -22,54 +22,39 @@
         print_r($errors->all());
     @endphp
     </pre> --}}
+
+
         <div class="container">
-            <h1 class="text-center "> Registration Form</h1>
-            <label for="">Name</label>
-            <div class="form-group">
-                <input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId"
-                    value="{{ old('name') }}" />
-                <span class="text-danger">
-                    @error('name')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
+            <x-input type="text" name="name" label="Please Enter Name" />
+            <span class="text-danger">
+                @error('name')
+                    {{ $message }}
+                @enderror
+            </span>
+            <x-input type="email" name="email" label="Please Enter Email" />
+            <span class="text-danger">
+                @error('email')
+                    {{ $message }}
+                @enderror
+            </span>
+            <x-input type="password" name="password" label="Please Enter Password" />
+            <span class="text-danger">
+                @error('password')
+                    {{ $message }}
+                @enderror
+            </span>
+            <x-input type="password" name="password_confirmation" label="Confirm Password" />
+            <span class="text-danger">
+                @error('password_confirmation')
+                    {{ $message }}
+                @enderror
+            </span>
+            <div>
+                <input type="submit" value="submit" class="btn btn-primary">
 
-            <div class="form-group">
-                <label for="">Email</label>
-                <input type="email" name="email" id="" class="form-control" placeholder="" aria-describedby="helpId"
-                    value="{{ old('email') }}" />
-                <span class="text-danger">
-                    @error('email')
-                        {{ $message }}
-                    @enderror
-                </span>
             </div>
-
-            <div class="form-group">
-                <label for="">Password</label>
-                <input type="password" name="password" id="" class="form-control" placeholder=""
-                    aria-describedby="helpId" />
-                <span class="text-danger">
-                    @error('password')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
-
-            <div class="form-group">
-                <label for="">Confirm_Password</label>
-                <input type="password" name="password_confirmation" id="" class="form-control" placeholder=""
-                    aria-describedby="helpId" />
-                <span class="text-danger">
-                    @error('password_confirmation')
-                        {{ $message }}
-                    @enderror
-                </span>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+
     </form>
 </body>
 

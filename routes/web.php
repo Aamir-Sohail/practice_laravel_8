@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\SingleActionController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\RegistrationController;
-
+use App\Models\Customers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,7 +99,21 @@ Route::get('/about',function(){
         Route::resource('/photo',PhotoController::class);
 
 
-        //Crud Operation start in this stage 
+       
         Route::get('/register', [RegistrationController::class,'index']);
 
         Route::post('/register', [RegistrationController::class,'store']);
+
+    //  New Routes
+    Route::get('/customer', function () {
+       $customers = Customers::all();
+        echo "<pre>";
+        print_r($customers->toArray());
+    }); 
+
+    //New Routes for Crud Operation..
+    Route::get('/customers',[CustomersController::class,'index']);
+    Route::post('/customers',[CustomersController::class,'store']);
+
+
+
