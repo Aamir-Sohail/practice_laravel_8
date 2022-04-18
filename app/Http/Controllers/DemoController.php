@@ -8,7 +8,7 @@ class DemoController extends Controller
 {
    public function index()
    {
-       return view('DemoProject.Demo_home'); 
+       return view('DemoProject.Demo_home');
 
    }
    public function aboutpage()
@@ -20,4 +20,5 @@ class DemoController extends Controller
         return view('DemoProject.Demo_courses');
 
     }
+    
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\DemoController;
 use App\Http\Controllers\SingleActionController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\RegistrationController;
+
 use App\Models\Customers;
 /*
 |--------------------------------------------------------------------------
@@ -47,13 +48,13 @@ Route::get('/demo', function () {
     return view('demo');
 });
 //this routes is used for the show the specfic name /data in url also add id/
-// Route::get('/data/{name}/{id?}', function ($name,$id = null){
-//         //    return "Hello";
-//             echo $name . " ";
-//             echo $id;
-//             // $data =compact($name,$id);
-//             // return view('demo')->with($data);
-// });
+Route::get('/data/{name}/{id?}', function ($name, $id = null) {
+    //    return "Hello";
+    echo $name . " ";
+    echo $id;
+    // $data =compact($name,$id);
+    // return view('demo')->with($data);
+});
 //showing the view page data....
 Route::get('/data/{name}/{id?}', function ($name, $id = null) {
     $data =  compact('name', 'id');
@@ -66,7 +67,7 @@ Route::get('/data/{name}/{id?}', function ($name, $id = null) {
 // New Project For function.....
 Route::get('function/{name?}', function ($name = null) {
     $demo = "<h2> The new Mehtode in Laravel </h2>";
-    $data = compact('name','demo');
+    $data = compact('name', 'demo');
     return view('home1')->with($data);
 });
 
@@ -74,46 +75,49 @@ Route::get('function/{name?}', function ($name = null) {
 
 // The new PrOject Routes For layout
 
-Route::get('home',function( ){
-return view('layouts.home');
-
+Route::get('home', function () {
+    return view('layouts.home');
 });
 
 
-Route::get('/about',function(){
+Route::get('/about', function () {
     return view('layouts.about');
-    });
+});
 
-    Route::get('/courses',function(){
-        return view('layouts.courses');
-        });
-
-
-        // NEW Project with ForntEnd routes..
-        Route::get('/index',[DemoController::class,'index']);
-        Route::get('/about',[DemoController::class,'aboutpage']);
-        // Route::get('/course',[DemoController::class,'coursespage']);
-        // singleActionController is used for single function array not used..
-        Route::get('/course',SingleActionController::class);
-        //Route for Nlew Controller PhotoController which work as a Resouce Controller.
-        Route::resource('/photo',PhotoController::class);
+Route::get('/courses', function () {
+    return view('layouts.courses');
+});
 
 
-       
-        Route::get('/register', [RegistrationController::class,'index']);
+// NEW Project with ForntEnd routes..
+Route::get('/index', [DemoController::class, 'index']);
+Route::get('/about', [DemoController::class, 'aboutpage']);
 
-        Route::post('/register', [RegistrationController::class,'store']);
-
-    //  New Routes
-    Route::get('/customer', function () {
-       $customers = Customers::all();
-        echo "<pre>";
-        print_r($customers->toArray());
-    }); 
-
-    //New Routes for Crud Operation..
-    Route::get('/customers',[CustomersController::class,'index']);
-    Route::post('/customers',[CustomersController::class,'store']);
+// Route::get('/course',[DemoController::class,'coursespage']);
+// singleActionController is used for single function array not used..
+Route::get('/course', SingleActionController::class);
+//Route for Nlew Controller PhotoController which work as a Resouce Controller.
+Route::resource('/photo', PhotoController::class);
 
 
 
+Route::get('/register', [RegistrationController::class, 'index']);
+
+Route::post('/register', [RegistrationController::class, 'store']);
+
+//  New Routes
+Route::get('/customer', function () {
+    $customers = Customers::all();
+    echo "<pre>";
+    print_r($customers->toArray());
+});
+
+//New Routes for Crud Operation..
+Route::get('/customers', [CustomersController::class, 'index'])->name('customers.view');
+Route::get('/view', [CustomersController::class, 'view'])->name('view.data');
+Route::get('/customers/create', [CustomersController::class, 'create'])->name('customer.create');
+Route::post('/customers', [CustomersController::class, 'store']);
+Route::get('/', [CustomersController::class, 'Navbar']);
+Route::get('/customers/delete/{id}', [CustomersController::class, 'delete'])->name('customer.delete');
+Route::get('/customers/edit/{id}', [CustomersController::class, 'edit'])->name('customer.edit');
+Route::post('/customers/update/{id}', [CustomersController::class, 'update'])->name('customer.update');
