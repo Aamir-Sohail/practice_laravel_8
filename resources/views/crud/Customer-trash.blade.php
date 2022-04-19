@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Show Data</title>
+    <title>Customer_Trash</title>
 
 
     <!-- Required meta tags -->
@@ -20,10 +20,10 @@
             <button class="btn btn-primary d-inline-block m-2 float-right"> Add</button></a>
     </div>
     <div>
-        <a href="{{url('customer/trash')}}">
-            <button class="btn btn-danger d-inline-block m-2 float-right">Go-to-Trash</button></a>
+        <a href="{{url('view')}}">
+            <button class="btn btn-success d-inline-block m-2 float-right"> Customer-view</button></a>
     </div>
-
+   
     <nav class="navbar navbar-expand-sm navbar-blue bg-light">
         <a class="navbar-brand" href="#">
             @if (session()->has('name'))
@@ -120,14 +120,14 @@
                             {{-- user for the url function (URL Methode) --}}
                             {{-- <a href="{{url('/customer/delete/')}}/{{$customer->id}}"> --}}
                             {{-- The Route methode --}}
-                            <a href="{{ route('customer.delete', ['id' => $customer->id]) }}">
+                            <a href="{{ route('customer.force-delete', ['id' => $customer->id]) }}">
                                 <button class="btn btn-danger">
-                                    Trash
+                                    Delete
                                 </button>
                             </a>
-                            <a href="{{ route('customer.edit', ['id' => $customer->id]) }}">
+                            <a href="{{ route('customer.restore', ['id' => $customer->id]) }}">
                                 <button class="btn btn-primary">
-                                    Edit
+                                    Restore
                                 </button>
                             </a>
                         </td>

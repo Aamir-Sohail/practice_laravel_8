@@ -55,10 +55,10 @@
 
             <label for="">Name</label>
             <div class="form-group">
-                <input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{ $customer->name }}" />
+                <input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId"   value="{{ $customer->name }}"/>
                 <span class="text-danger">
                     @error('name')
-                        {{ $message }}  
+                        {{ $message }}
                     @enderror
                 </span>
             </div>

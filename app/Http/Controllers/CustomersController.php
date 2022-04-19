@@ -8,8 +8,9 @@ use App\Models\Customers;
 class CustomersController extends Controller
 {
     public function index()
-    {$customer = Customers::all();
-        dd($customer);
+    {
+        $customer = new Customers();
+        // dd($customer);
         $url = url('/customers');
         $title = "Customers Registration";
         $data = compact('url', 'title', 'customer');
@@ -35,6 +36,8 @@ class CustomersController extends Controller
         //    echo "<pre>";
         //    print_r($request->all());
         //Insert Query in Laravel...
+        // p($request->all());
+        // die;
         $customers = new Customers;
         $customers->name = $request['name'];
         $customers->email = $request['email'];
@@ -59,6 +62,13 @@ class CustomersController extends Controller
         //   die;
         $data = compact('customers');
         return view('crud.Customers-view')->with($data);
+    }
+
+     public function Trash()
+    {
+      $customers = Customers::onlyTrashed()->get();
+      $data = compact('customers');
+      return view('crud.Customer-trash')->with($data);
     }
     public function Navbar()
     {
@@ -86,6 +96,26 @@ class CustomersController extends Controller
         //  echo "<pre>";
         //  print_r($customers);// find the record the user....
     }
+
+    public function Forcedelete($id)
+    {
+        $customers = Customers::withTrashed()->find($id);
+
+        if (!is_null($customers)) {
+            $customers->forceDelete();
+        }
+            return redirect()->back();
+        
+    }
+    public function Restore($id)
+    {
+        $customers = Customers::withTrashed()->find($id);
+        if (!is_null($customers)) {
+            $customers->restore();
+        return redirect('view');
+
+    }
+}
     public function edit($id)
     {
         $customer = Customers::find($id);
@@ -94,22 +124,22 @@ class CustomersController extends Controller
         } else {
             $title = "Update Customers";
             $url = url('customers/update') . "/" . $id;
-            $data = compact('customer', 'url','title');
+            $data = compact('customer', 'url', 'title');
             return view('crud.CustomerInsert')->with($data);
         }
     }
     public function update($id, Request $request)
     {
-   $customer = Customers::find($id);
-   $customer->name = $request['name'];
-   $customer->email = $request['email'];
-   $customer->gender = $request['gender'];
-   $customer->address = $request['address'];
-   $customer->state = $request['state'];
-   $customer->country = $request['country'];
-   $customer->dob = $request['dob'];
-   $customer->points = $request['points'];
-   $customer->save();
-return redirect()->route('view.data', ['customer' => $customer]);
+        $customer = Customers::find($id);
+        $customer->name = $request['name'];
+        $customer->email = $request['email'];
+        $customer->gender = $request['gender'];
+        $customer->address = $request['address'];
+        $customer->state = $request['state'];
+        $customer->country = $request['country'];
+        $customer->dob = $request['dob'];
+        $customer->points = $request['points'];
+        $customer->save();
+        return redirect()->route('view.data', ['customer' => $customer]);
     }
 }
