@@ -18,7 +18,7 @@
 <body>
     <div >
 
-        <a href="{{ route('customer.create') }}">
+        <a href="{{ route('customers.view') }}">
             <button class="btn btn-primary d-inline-block m-2 float-right"> Add</button></a>
     </div>
     <div>

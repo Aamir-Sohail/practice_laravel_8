@@ -8,6 +8,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Http\Request;
 use App\Models\Customers;
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,13 +112,24 @@ Route::get('/customer', function () {
     echo "<pre>";
     print_r($customers->toArray());
 });
-
+///////////////////////////////////////////////////////////////////////////
 //New Routes for Crud Operation..
+//Grouping the Whoole Route in Single
+Route::group(['prefix' =>'/customers'],function(){
+    //put the whole route in this array
+
+});
 Route::get('/customers', [CustomersController::class, 'index'])->name('customers.view');
-Route::get('/view', [CustomersController::class, 'view'])->name('view.data');
-Route::get('/customers/create', [CustomersController::class, 'create'])->name('customer.create');
+Route::get('/customers/view', [CustomersController::class, 'view'])->name('view.data');
+// Route::get('/customers/create', [CustomersController::class, 'create'])->name('customer.create');
 Route::post('/customers', [CustomersController::class, 'store']);
 Route::get('/', [CustomersController::class, 'Navbar']);
+// For languages Change....
+    // Route::get('/{lang?}',function($lang =null){
+    //     App::setlocale($lang);
+    //     return view('/');
+    // });
+
 Route::get('/customers/delete/{id}', [CustomersController::class, 'delete'])->name('customer.delete');
 Route::get('/customers/edit/{id}', [CustomersController::class, 'edit'])->name('customer.edit');
 Route::post('/customers/update/{id}', [CustomersController::class, 'update'])->name('customer.update');
@@ -143,3 +155,4 @@ Route::get('destory-session', function () {
     // session()->forget('id');
     return redirect('get-all-session');
 });
+///////////////////////////////////////////////////////////////////////

@@ -55,11 +55,13 @@ class CustomersController extends Controller
 
     public function view(Request $request)
     {
+        //data search in table
         $search = $request['search'] ?? "";
         if ($search != "") {
             //where Close Can put Here...
             $customers = Customers::where('name', 'LIKE', "%$search%")->orWhere('email', 'LIKE', "%$search%")->get();
         } else {
+            //pagination
             $customers = Customers::paginate(10);
         }
 
@@ -84,10 +86,10 @@ class CustomersController extends Controller
 
     public function create()
     {
-        $url = url('/customers');
-        $title = "Customers Registration";
-        $data = compact('url', 'title', 'customers');
-        return view('crud.CustomerInsert', $data);
+        // $url = url('/customers');
+        // $title = "Customers Registration";
+        // $data = compact('url', 'title', 'customers');
+        return view('crud.CustomerInsert');
     }
 
 

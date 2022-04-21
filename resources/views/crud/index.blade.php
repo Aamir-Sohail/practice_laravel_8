@@ -37,6 +37,16 @@
       </div>
   </nav>
   <body>
+      {{-- The Whole is used for different lang --}}
+<div class="container">
+    {{-- to check the lang different type --}}
+    <br/>
+ <a class="nav-link" href="{{url('/')}}" style="color:blue">English</a>
+    <a class="nav-link" href="{{url('/ur')}}" style="color:blue">Urdu</a>
+    <a class="nav-link" href="{{url('/ch')}}" style="color:blue">China</a>
+    <h2 class="center"> @lang('lang.welcome')</h2>
+
+</div>
 
   </body>
 </html>
