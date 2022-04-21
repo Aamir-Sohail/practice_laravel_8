@@ -53,22 +53,29 @@ class CustomersController extends Controller
         return redirect('customers');
     }
 
-    public function view()
+    public function view(Request $request)
     {
-        $customers = Customers::all();
+        $search = $request['search'] ?? "";
+        if ($search != "") {
+            //where Close Can put Here...
+            $customers = Customers::where('name', 'LIKE', "%$search%")->orWhere('email', 'LIKE', "%$search%")->get();
+        } else {
+            $customers = Customers::paginate(10);
+        }
+
         //   echo "<pre>";
         //   print_r($customers->toArray());
         //   echo "</pre>";
         //   die;
-        $data = compact('customers');
+        $data = compact('customers', 'search');
         return view('crud.Customers-view')->with($data);
     }
 
-     public function Trash()
+    public function Trash()
     {
-      $customers = Customers::onlyTrashed()->get();
-      $data = compact('customers');
-      return view('crud.Customer-trash')->with($data);
+        $customers = Customers::onlyTrashed()->get();
+        $data = compact('customers');
+        return view('crud.Customer-trash')->with($data);
     }
     public function Navbar()
     {
@@ -77,8 +84,10 @@ class CustomersController extends Controller
 
     public function create()
     {
-
-        return view('crud.CustomerInsert');
+        $url = url('/customers');
+        $title = "Customers Registration";
+        $data = compact('url', 'title', 'customers');
+        return view('crud.CustomerInsert', $data);
     }
 
 
@@ -104,18 +113,16 @@ class CustomersController extends Controller
         if (!is_null($customers)) {
             $customers->forceDelete();
         }
-            return redirect()->back();
-        
+        return redirect()->back();
     }
     public function Restore($id)
     {
         $customers = Customers::withTrashed()->find($id);
         if (!is_null($customers)) {
             $customers->restore();
-        return redirect('view');
-
+            return redirect('view');
+        }
     }
-}
     public function edit($id)
     {
         $customer = Customers::find($id);

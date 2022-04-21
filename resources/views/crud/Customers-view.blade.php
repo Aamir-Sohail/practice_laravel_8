@@ -10,17 +10,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <div>
+    <div >
+
         <a href="{{ route('customer.create') }}">
             <button class="btn btn-primary d-inline-block m-2 float-right"> Add</button></a>
     </div>
     <div>
-        <a href="{{url('customer/trash')}}">
+        <a href="{{ url('customer/trash') }}">
             <button class="btn btn-danger d-inline-block m-2 float-right">Go-to-Trash</button></a>
     </div>
 
@@ -51,9 +53,13 @@
                 <li class="nav-item dropdown">
 
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <form class="form-inline my-2 my-lg-0" action="" method="GET">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search"
+                    value="{{ $search }}">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <a href="{{ url('/view') }}">
+                    <button class="btn btn-outline-dark" type="button"> Reset</button>
+                </a>
             </form>
         </div>
     </nav>
@@ -132,12 +138,15 @@
                             </a>
                         </td>
                     </tr>
+
                 @endforeach
             </tbody>
+            {{-- pagination for the data --}}
+
         </table>
 
     </div>
-
+        {{$customers->links()}}
 </body>
 
 </html>
