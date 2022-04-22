@@ -16,14 +16,14 @@
 
 <body>
     <div>
-        <a href="{{ route('customer.create') }}">
+        <a href="{{route('customers.view') }}">
             <button class="btn btn-primary d-inline-block m-2 float-right"> Add</button></a>
     </div>
     <div>
-        <a href="{{url('view')}}">
+        <a href="{{url('/customers/view')}}">
             <button class="btn btn-success d-inline-block m-2 float-right"> Customer-view</button></a>
     </div>
-   
+
     <nav class="navbar navbar-expand-sm navbar-blue bg-light">
         <a class="navbar-brand" href="#">
             @if (session()->has('name'))

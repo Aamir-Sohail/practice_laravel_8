@@ -25,7 +25,7 @@
                   <a class="nav-link" href="{{url('/')}}/customers" style="color:blue">Customer Register</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url('/')}}/view" style="color:blue">Customers</a>
+                <a class="nav-link" href="{{url('/')}}/customers/view" style="color:blue">Customers</a>
             </li>
               <li class="nav-item dropdown">
 

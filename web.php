@@ -122,7 +122,7 @@ Route::group(['prefix' =>'/customers'],function(){
 });
 Route::get('/customers', [CustomersController::class, 'index'])->name('customers.view');
 Route::get('/customers/view', [CustomersController::class, 'view'])->name('view.data');
- Route::get('/customers/create', [CustomersController::class, 'create'])->name('customer.create');
+// Route::get('/customers/create', [CustomersController::class, 'create'])->name('customer.create');
 Route::post('/customers', [CustomersController::class, 'store']);
 Route::get('/', [CustomersController::class, 'Navbar']);
 // For languages Change....
@@ -134,7 +134,7 @@ Route::get('/', [CustomersController::class, 'Navbar']);
 Route::get('/customers/delete/{id}', [CustomersController::class, 'delete'])->name('customer.delete');
 Route::get('/customers/edit/{id}', [CustomersController::class, 'edit'])->name('customer.edit');
 Route::post('/customers/update/{id}', [CustomersController::class, 'update'])->name('customer.update');
-Route::get('/customer/trash',[CustomersController::class,'Trash']);
+Route::get('/customers/trash',[CustomersController::class,'Trash']);
 Route::get('/customers/restore/{id}', [CustomersController::class, 'Restore'])->name('customer.restore');
 Route::get('/customers/force-delete/{id}', [CustomersController::class, 'Forcedelete'])->name('customer.force-delete');
 
@@ -162,5 +162,3 @@ Route::get('destory-session', function () {
 
 //Testing Controller For The Relationship in to laravel one to one....
 Route::get('/data',[TestingController::class,'index']);
-Route::get('/group',[TestingController::class,'group']);
-

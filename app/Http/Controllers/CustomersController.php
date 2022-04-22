@@ -103,7 +103,7 @@ class CustomersController extends Controller
             $customers->delete();
         }
         //  return redirect()->back();
-        return redirect('view');
+        return redirect('customers/view');
         //  echo "<pre>";
         //  print_r($customers);// find the record the user....
     }
@@ -122,7 +122,7 @@ class CustomersController extends Controller
         $customers = Customers::withTrashed()->find($id);
         if (!is_null($customers)) {
             $customers->restore();
-            return redirect('view');
+            return redirect('customers/view');
         }
     }
     public function edit($id)
