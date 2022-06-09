@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customers extends Model
 {
     use HasFactory;
-    use SoftDeletes;
-    protected $table = "customers";
-    protected $priamrykey = "id";
+   
 
 
     //this is mutator in which the data set when the data transform to database in insertion time 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\SingleActionController;
@@ -163,4 +164,27 @@ Route::get('destory-session', function () {
 //Testing Controller For The Relationship in to laravel one to one....
 Route::get('/data',[TestingController::class,'index']);
 Route::get('/group',[TestingController::class,'group']);
-
+//Routing For Guard.......
+Route::get('/no-access', function(){
+        echo "You're session is not Create";
+        die;
+});
+// for login.........
+Route::get('/login', function(){
+    session()->put('user_id',1);
+return redirect('/');
+    // echo '<pre>';
+    // print_r(session()->all());
+    // die;
+});
+//for logout....
+Route::get('/logout', function(){
+    session()->forget('user_id',1);
+return redirect('/');
+});
+//LoginGuard Protected the route..........
+Route::get('/data',[TestingController::class,'index'])->middleware('login');
+Route::get('/group',[TestingController::class,'group'])->middleware('login');
+//-------------------------
+Route::get('/imageindex',[ImageController::class,'index']);
+Route::post('/image',[ImageController::class,'imagestore'])->name('image.store');
